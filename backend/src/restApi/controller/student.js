@@ -1,6 +1,6 @@
 import { body, validationResult } from 'express-validator'
 import path from 'path'
-import grpc from 'grpc'
+import * as grpc from '@grpc/grpc-js'
 const protoLoader = require("@grpc/proto-loader")
 import config from '../../config/service'
 const PROTO_PATH = path.join(__dirname, '../../proto/student.proto')
@@ -39,6 +39,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 })
 
 // Load in our service definition
+console.log({grpc})
 const studentProto = grpc.loadPackageDefinition(packageDefinition).student
 const client = new studentProto.StudentService(config.student.host +':'+ config.student.port, grpc.credentials.createInsecure())
 

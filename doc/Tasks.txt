@@ -1,0 +1,27 @@
+Részfeladatok címe után becsült idő.
+##> napló, lesznek napló-commitok. Végén tényleges idő.
+
+0. Mindent telepítek és először a frontenden át barátkozom a környezettel. - tipp: 1 óra
+    ## front> node downgrade
+    ## back>  node-gyp build error hegyek. Package.json alapján soronkénti próbálkozások.
+                grpc/proto-loader build hal meg húsz perc agónia után.
+                error C:\Users\user\Desktop\Automizy\dev-test\backend\node_modules\grpc: Command failed.
+                Exit code: 1
+                Command: node-pre-gyp install --fallback-to-build --library=static_library
+                Arguments:
+                Directory: C:\Users\user\Desktop\Automizy\dev-test\backend\node_modules\grpc
+                Output: (...)
+
+                grpc/grpc-js telepítve helyette, lefut, importokat updateltem, eddig működik.
+    ## db>    OK
+    ## μsrv>  bindAsync() bind helyett, callback megadása.
+
+    lett: 3 óra.
+
+1. Megértem a Student modul működését - 1.5 óra
+  1.1 Feladatkiírás böngészése
+  1.2 Rest vizsgálata
+  1.3 gRPC vizsgálata
+  1.4 microservice-ek vizsgálata
+
+2. A Student modul és a dokumentáció alapján elkészítem a Project modult. 

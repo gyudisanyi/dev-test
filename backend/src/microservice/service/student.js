@@ -1,5 +1,5 @@
 import path from 'path'
-import grpc from 'grpc'
+import * as grpc from '@grpc/grpc-js'
 const protoLoader = require("@grpc/proto-loader")
 import config from '../../config/service'
 import db from '../../microservice/database/connect'
@@ -155,7 +155,7 @@ const exposedFunctions = {
 }
 
 server.addService(studentProto.StudentService.service, exposedFunctions)
-server.bind(config.student.host +':'+ config.student.port, grpc.ServerCredentials.createInsecure())
+server.bindAsync(config.student.host +':'+ config.student.port, grpc.ServerCredentials.createInsecure(), (error)=>{ throw error;})
 
 db.sequelize.sync().then(() => {
     console.log("Re-sync db.")

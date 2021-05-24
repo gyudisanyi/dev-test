@@ -22,12 +22,13 @@
     ]
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.3.2",
     "@grpc/proto-loader": "^0.5.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.5.0",
-    "grpc": "^1.24.2",
     "mysql2": "^2.1.0",
+    "node-gyp": "^8.0.0",
     "path": "^0.12.7",
     "sequelize": "^5.21.11"
   },
