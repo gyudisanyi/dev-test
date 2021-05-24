@@ -41,7 +41,6 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 // Load in our service definition
 console.log({grpc})
 const studentProto = grpc.loadPackageDefinition(packageDefinition).student
-console.log({studentProto});
 const client = new studentProto.StudentService(config.student.host +':'+ config.student.port, grpc.credentials.createInsecure())
 
 const studentList = (options) => {

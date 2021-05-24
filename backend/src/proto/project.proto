@@ -5,8 +5,8 @@ service ProjectService {
    rpc List (Empty) returns (ProjectList) {}
    rpc Create (Project) returns (Project) {}
    rpc Read (ProjectRequestId) returns (Project) {}
-   rpc Update (Project) returns (Empty) {}
-   rpc Delete (ProjectRequestId) returns (Empty) {}
+   rpc Update (Project) returns (ProjectRequestId) {}
+   rpc Delete (ProjectRequestId) returns (ProjectRequestId) {}
 }
 message Empty {}
 message Project {

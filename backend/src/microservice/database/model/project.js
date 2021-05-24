@@ -14,7 +14,7 @@ const ProjectModel = ({
       unique: true,
       allowNull: false
     },
-    description: {
+    desc: {
       type: TEXT,
     },
     createdAt: {

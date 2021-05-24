@@ -117,6 +117,7 @@ exports.read = async (req, res, next) => {
 
 const projectUpdate = (options) => {
     return new Promise((resolve, reject) => {
+      console.log({options})
       client.Update(options, (error, response) => {
             if (error) { reject(error) }
             resolve(response)
@@ -127,8 +128,9 @@ const projectUpdate = (options) => {
 exports.update = async (req, res, next) => {
     try{
         let result = await projectUpdate({
+            "id": req.params.id,
             "name": req.body.name,
-            "desc": req.body.last_name
+            "desc": req.body.desc
         })
         res.status(200).json({id: req.params.id})
     } catch(e){
