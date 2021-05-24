@@ -186,7 +186,30 @@
 						"header": [],
 						"url": null
 					},
-					"response": []
+					"response": [
+						{
+							"name": "List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/project",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"project"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"projects\": [\r\n        {\r\n            \"id\": \"1\",\r\n            \"name\": \"First project\",\r\n            \"desc\": \"\",\r\n            \"createdAt\": \"Mon May 24 2021 14:45:54 GMT+0200 (közép-európai nyári idő)\",\r\n            \"updatedAt\": \"Mon May 24 2021 14:45:54 GMT+0200 (közép-európai nyári idő)\"\r\n        }\r\n    ]\r\n}"
+						}
+					]
 				},
 				{
 					"name": "Create",

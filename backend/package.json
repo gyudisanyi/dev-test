@@ -7,6 +7,7 @@
   "scripts": {
     "start:rest": "babel-node src/restApi/server.js",
     "start:micro:student": "babel-node src/microservice/service/student.js",
+    "start:micro:project": "babel-node src/microservice/service/project.js",
     "start:micro": "concurrently --kill-others \"babel-node src/microservice/service/student.js\""
   },
   "babel": {

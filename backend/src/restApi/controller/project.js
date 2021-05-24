@@ -40,7 +40,8 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 // Load in our service definition
 console.log({grpc})
 const projectProto = grpc.loadPackageDefinition(packageDefinition).project
-const client = new projectProto.projectService(config.project.host +':'+ config.project.port, grpc.credentials.createInsecure())
+console.log({projectProto})
+const client = new projectProto.ProjectService(config.project.host +':'+ config.project.port, grpc.credentials.createInsecure())
 
 const projectList = (options) => {
     return new Promise((resolve, reject) => {
