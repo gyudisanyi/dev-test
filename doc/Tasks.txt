@@ -36,5 +36,13 @@ lett: további fél óra - telepítés közben már gusztáltam.
 lett: 2 óra, nemigen volt elakadás, de a db "project.description" és a több más helyen szereplő "desc" eltérést egyelőre nem sikerült kiiktatni
       - SELECT AS-szerűen, de hol? Ezzel elment egy óra, irány a front, pedig okoz ám bugokat.
 
-3. Frontend elkészítése
+3. Frontend elkészítése (másolás)
   3.1 A feladatkiírással ellentétben a Project oldal nincs kész, a Student alapján készítem el. - tipp: 1 óra
+    ## Ez simán sokkal hamarabb kész lett, aztán debugoltam a backet.
+  
+4. Management modul - tipp: 3 óra, mert lassulok, gyors haladásra és banális elakadásokra számítok.
+  4.1 Postman hívásokkal kezdem, hogy átgondoljam és formálisan felvázoljam a funkcionalitást. - tipp: egy óra
+  4.2 REST
+  4.3 gRPC
+  4.4 microservice, ORM
+  
