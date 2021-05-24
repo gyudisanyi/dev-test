@@ -16,7 +16,7 @@ Részfeladatok címe után becsült idő.
     ## db>    OK
     ## μsrv>  bindAsync() bind helyett, callback megadása.
 
-    lett: 3 óra.
+  lett: 3 óra.
 
 1. Megértem a Student modul működését - 1.5 óra
   1.1 Feladatkiírás böngészése
@@ -24,4 +24,13 @@ Részfeladatok címe után becsült idő.
   1.3 gRPC vizsgálata
   1.4 microservice-ek vizsgálata
 
-2. A Student modul és a dokumentáció alapján elkészítem a Project modult. 
+lett: további fél óra - telepítés közben már gusztáltam.
+
+2. A Student modul és a dokumentáció alapján elkészítem a Project modult. - tipp: 2 óra
+  2.1 Postman hívások
+  2.2 REST
+  2.3 gRPC
+  2.4 microservices
+  2.5 ORM
+
+
