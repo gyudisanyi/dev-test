@@ -15,7 +15,7 @@ const ProjectModel = ({
       allowNull: false
     },
     description: {
-      type: TEXT
+      type: TEXT,
     },
     createdAt: {
       type: DATE,

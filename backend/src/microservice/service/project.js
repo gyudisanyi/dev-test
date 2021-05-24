@@ -65,7 +65,7 @@ const Read = async (call, callback) => {
     let id = call.request.id
     // data validation
     // ...
-    // Kontakt mentése adatbázisba
+    // Projekt mentése adatbázisba
     try{
         let result = await projectModel.findByPk(id)
         if(result){

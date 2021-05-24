@@ -5,6 +5,6 @@ module.exports={
     },
     project: {
         'host': '0.0.0.0',
-        'port': 50054
+        'port': 50055
     }
 }
