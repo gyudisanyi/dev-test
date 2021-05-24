@@ -33,4 +33,8 @@ lett: további fél óra - telepítés közben már gusztáltam.
   2.4 microservices
   2.5 ORM
 
-lett: 2 óra, nemigen volt elakadás, de a db "project.description" és a több más helyen szereplő "desc" -et egyelőre nem sikerült összehangolni SELECT AS-szerűen, de hol? Ezzel elment egy óra, irány a front, pedig okoz ám bugokat.
+lett: 2 óra, nemigen volt elakadás, de a db "project.description" és a több más helyen szereplő "desc" eltérést egyelőre nem sikerült kiiktatni
+      - SELECT AS-szerűen, de hol? Ezzel elment egy óra, irány a front, pedig okoz ám bugokat.
+
+3. Frontend elkészítése
+  3.1 A feladatkiírással ellentétben a Project oldal nincs kész, a Student alapján készítem el. - tipp: 1 óra
