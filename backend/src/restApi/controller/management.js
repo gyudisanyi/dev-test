@@ -9,8 +9,8 @@ exports.validationRules = (method) => {
     switch (method) {
         case 'create': {
             return [
-                body('student_ids').not().isEmpty().isArray(),
-                body('project_ids').not().isEmpty().isArray(),
+                body('student_ids').notEmpty().isArray(),
+                body('project_ids').notEmpty().isArray(),
             ]
         }
     }
@@ -33,6 +33,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
     keepCase: true,
     longs: String,
     enums: String,
+    arrays: true,
     defaults: true,
     oneofs: true
 })
@@ -71,7 +72,7 @@ const managementCreate = (options) => {
 
 exports.create = async (req, res, next) => {
     try{
-        let result = await managementCreate({
+      let result = await managementCreate({
             "student_ids": req.body.student_ids,
             "project_ids": req.body.project_ids,
         })

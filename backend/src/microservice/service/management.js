@@ -87,6 +87,7 @@ const Read = async (call, callback) => {
 // Implement the update function
 const Update = async (call, callback) => {
     let management = call.request
+    console.log(management, "UPD")
     try{
         let affectedRows = await managementModel.update(
             {

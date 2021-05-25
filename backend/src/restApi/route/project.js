@@ -17,8 +17,8 @@ router.get('/', project.list)
 router.post('/', project.validationRules('create'), project.validate, project.create)
 // GET request for read an item by id
 router.get('/:id', project.read)
-// GET request for update an item by id
+// PUT request for update an item by id
 router.put('/:id', project.update)
-// GET request for delete item by id
+// DELETE request for delete item by id
 router.delete('/:id', project.delete)
 export default router

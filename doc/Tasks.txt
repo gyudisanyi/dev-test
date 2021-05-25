@@ -12,7 +12,7 @@ Részfeladatok címe után becsült idő.
                 Directory: C:\Users\user\Desktop\Automizy\dev-test\backend\node_modules\grpc
                 Output: (...)
 
-                grpc/grpc-js telepítve helyette, lefut, importokat updateltem, eddig működik.
+                @grpc/grpc-js telepítve helyette, lefut, importokat updateltem, eddig működik.
     ## db>    OK
     ## μsrv>  bindAsync() bind helyett, callback megadása.
 
@@ -24,7 +24,7 @@ Részfeladatok címe után becsült idő.
   1.3 gRPC vizsgálata
   1.4 microservice-ek vizsgálata
 
-lett: további fél óra - telepítés közben már gusztáltam.
+lett: fél óra - telepítés közben már gusztáltam.
 
 2. A Student modul és a dokumentáció alapján elkészítem a Project modult. - tipp: 2 óra
   2.1 Postman hívások
@@ -40,9 +40,29 @@ lett: 2 óra, nemigen volt elakadás, de a db "project.description" és a több 
   3.1 A feladatkiírással ellentétben a Project oldal nincs kész, a Student alapján készítem el. - tipp: 1 óra
     ## Ez simán sokkal hamarabb kész lett, aztán debugoltam a backet.
   
-4. Management modul - tipp: 3 óra, mert lassulok, gyors haladásra és banális elakadásokra számítok.
+4. Management modul backend - tipp: 3 óra, mert lassulok, gyors haladásra és banális elakadásokra számítok.
   4.1 Postman hívásokkal kezdem, hogy átgondoljam és formálisan felvázoljam a funkcionalitást. - tipp: egy óra
   4.2 REST
   4.3 gRPC
   4.4 microservice, ORM
+
+  ## A fentiek működnek (összesen volt eddig egy óra), készen állnak a logika fogadására, eddig fért egy munkanapba.
+
+  ****
+
+  ## Másnap 13:30 - jöjjön az a logika! tipp: egy óra.
+  ## Management tábla: több student_id és több project_id,
+  ## Döntés: Backenden JSON.stringify készít Stringet egy Arrayből (Setből), így tároljuk, vissza Parse. Ez izometrikus.
+      - Átdöntés: "In proto3, repeated fields of scalar numeric types use packed encoding by default."
+        Azaz arrayt fogad, "1,2,3" formátumban stringként tárolja és úgy is adja vissza (nincs array Type).
+        Tehát Fronton parse-olunk belőle Arrayt.
   
+  lett: 45 perc. De a logika csak egy kis validation meg ezek a tárolási kutatások voltak.
+
+5. Management modul frontend - tipp: 2 óra
+  5.1 Elképzelés: management list lekérdezést student és project list lekérdezések követik,
+      így a managementekben tárolt ID-khez neveket tudunk társítani, ezek jelennek meg
+      MVP hangulatban checkbox listákon.
+    
+
+

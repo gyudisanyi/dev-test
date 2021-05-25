@@ -18,6 +18,7 @@ exports.validationRules = (method) => {
 }
 
 exports.validate = (req, res, next) => {
+
     const errors = validationResult(req)
     if (errors.isEmpty()) {
         return next()

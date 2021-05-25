@@ -17,8 +17,8 @@ router.get('/', management.list)
 router.post('/', management.validationRules('create'), management.validate, management.create)
 // GET request for read an item by id
 router.get('/:id', management.read)
-// GET request for update an item by id
+// PUT request for update an item by id
 router.put('/:id', management.update)
-// GET request for delete item by id
+// DELETE request for delete item by id
 router.delete('/:id', management.delete)
 export default router
