@@ -63,6 +63,10 @@ lett: 2 óra, nemigen volt elakadás, de a db "project.description" és a több 
   5.1 Elképzelés: management list lekérdezést student és project list lekérdezések követik,
       így a managementekben tárolt ID-khez neveket tudunk társítani, ezek jelennek meg
       MVP hangulatban checkbox listákon.
+
+  lett: 2.5 óra.
+
+6. Üzemeltetés (to be continued)
     
 
 

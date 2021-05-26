@@ -11,8 +11,7 @@ import {
     Button, 
     Modal, 
     message,
-    Form, 
-    Input,
+    Form,
     Checkbox } from 'antd'
 const { Title } = Typography
 const { Header, Content } = Layout
