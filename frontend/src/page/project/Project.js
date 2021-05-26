@@ -230,7 +230,7 @@ const AddProjectModal=({
                 layout="vertical"
                 >
                 <Form.Item
-                    label={'name'}
+                    label={'Project name'}
                     name="name"
                     rules={[{required: true, message: 'Please type Project name!'}]}
                 >
@@ -239,7 +239,7 @@ const AddProjectModal=({
                         placeholder="Name"/>
                 </Form.Item>
                 <Form.Item
-                    label={'desc'}
+                    label={'Description'}
                     name="desc"
                     rules={[{required: true, message: 'Please type Project description!'}]}
                 >

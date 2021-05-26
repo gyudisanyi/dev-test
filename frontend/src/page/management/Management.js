@@ -12,7 +12,8 @@ import {
     Modal, 
     message,
     Form, 
-    Input } from 'antd'
+    Input,
+    Checkbox } from 'antd'
 const { Title } = Typography
 const { Header, Content } = Layout
 const { confirm } = Modal
@@ -20,8 +21,63 @@ import { ExclamationCircleOutlined } from '@ant-design/icons'
 import "../../layout/Layout.css"
 
 const Management=()=>{
-    const [reloadListTrigger, setReloadListTrigger] = useState(null)
-    const [showModal, setShowModal] = useState(false)
+  const [reloadListTrigger, setReloadListTrigger] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+  
+  // A kreáló modal és a listázás is használja a studentlistát, projektlistát, ezért itt lehívom és elkészítem [id]: "Firstname Lastname" formátumban
+  
+  const [studentList, setStudentList] = useState({
+    data: null,
+    complete: false,
+    error: false
+  })
+  
+  const [studentOptions, setStudentOptions] = useState([]) // a Modalnak már úgy adom át, ahogy a checkbox group fogyasztja
+
+    // Student lista {[id]: "Firstname Lastname"}
+
+    useEffect(
+      () => {
+        const getStudents = async () => {
+          let studentsByID = {};
+        try {
+          const res = await axios.get('api/student');
+          console.log(Object.entries(res.data.students))
+          Object.entries(res.data.students).map(entry => studentsByID[entry[1].id] = `${entry[1].first_name} ${entry[1].last_name}`)
+          console.log(studentsByID);
+          setStudentList({
+            data: studentsByID,
+            error: false,
+            complete: true
+          })
+        } catch (err) {
+          console.log(err)
+          setLoader(false)
+          setStudentList({
+            data: null,
+            error: true,
+            complete: true
+          })
+        }
+      };
+      getStudents();
+      },
+      []
+    )
+
+    // checkbox group student options elkészítése
+
+    useEffect(
+      () => {
+        if (!studentList.data) {return}
+        const studentsToOptions = []
+        Object.keys(studentList.data).map(key => studentsToOptions.push({"label": studentList.data[key], "value": key}))
+        console.log(studentsToOptions)
+        setStudentOptions(studentsToOptions)
+      }, [studentList]
+    )
+    
+
     // Új management hozzáadása gombra kattintás
     const onClickAddNewManagement=()=>{
         setShowModal(true)
@@ -51,15 +107,18 @@ const Management=()=>{
                 </Row>
             </Header>
             <Content className="content">
-                <ListManagement reloadListTrigger={reloadListTrigger}/>
-                <AddManagementModal visible={showModal} onClickCancel={onClickCancel} onDone={onDone}/>
+                <ListManagement reloadListTrigger={reloadListTrigger} studentList={studentList}/>
+                { studentOptions ?
+                  <AddManagementModal visible={showModal} onClickCancel={onClickCancel} onDone={onDone} studentOptions={studentOptions}/>
+                  : ''
+                }
             </Content>
         </Layout>
     )
 }
 
 // Managementek listázása
-const ListManagement =({reloadListTrigger})=>{
+const ListManagement =({reloadListTrigger, studentList})=>{
     const [trigger, setTrigger] = useState()
     const [loader, setLoader] = useState(true)
 
@@ -69,11 +128,6 @@ const ListManagement =({reloadListTrigger})=>{
         error: false
     })
 
-    const [studentList, setStudentList] = useState({
-      data: null,
-      complete: false,
-      error: false
-    })
     // Managementek betöltése
     useEffect(
         () => {
@@ -106,34 +160,7 @@ const ListManagement =({reloadListTrigger})=>{
         [trigger, reloadListTrigger]
     )
 
-    useEffect(
-      () => {
-        const getStudents = async () => {
-          let studentsByID = {};
-        try {
-          const res = await axios.get('api/student');
-          Object.keys(res.data).map(k => studentsById[k] = res.data[k].first_name + res.data[k].last_name)
-          console.log(studentsByID);
-          setStudentList({
-            data: studentsByID,
-            error: false,
-            complete: true
-          })
-        } catch (err) {
-          console.log(err)
-          setLoader(false)
-          setStudentList({
-            data: null,
-            error: true,
-            complete: true
-          })
-        }
-      };
-      getStudents();
-      },
-      [trigger, reloadListTrigger]
-    )
-    // Adott management törlésére kattinttás
+    // Adott management törlésére kattintás
     const onClickDeleteManagement=({name, id})=>{
         confirm({
           title: 'Are you sure delete this Management?',
@@ -172,8 +199,7 @@ const ListManagement =({reloadListTrigger})=>{
                     list.data &&
                     list.data.managements.length &&
                     studentList.complete &&
-                    studentList.data &&
-                    studentList.data.length)
+                    studentList.data)
                     ?
                     <List
                         bordered
@@ -181,7 +207,7 @@ const ListManagement =({reloadListTrigger})=>{
                         renderItem={item => (
                             <List.Item>
                                 <Typography.Text strong>
-                                    {JSON.parse("["+`${item.student_ids}`+"]").map(id=>studentList.data[id])}
+                                    {JSON.parse(`[${item.student_ids}]`).map(id => <p key={`student${id}`}>{studentList.data[id]}</p>)}
                                 </Typography.Text>
                                 <Typography.Text>
                                     {item.project_ids}
@@ -206,19 +232,21 @@ const ListManagement =({reloadListTrigger})=>{
 const AddManagementModal=({
     visible,
     onClickCancel,
-    onDone
+    onDone,
+    studentOptions
 })=>{
     const [form] = Form.useForm()
 
     const onClickSave=()=>{
         form
         .validateFields()
-        .then(values => {
+        .then(values => console.log(values)) 
+        /*.then(values => {
             saveManagement({
                 student_ids: values.student_ids,
                 project_ids: values.project_ids
             })
-        })
+        })*/
         .catch(info => {
             console.log('Validate Failed:', info)
         })
@@ -260,13 +288,11 @@ const AddManagementModal=({
                 layout="vertical"
                 >
                 <Form.Item
-                    label={'Student IDs'}
+                    label={'Students'}
                     name="student_ids"
                     rules={[{required: true, message: 'Please tick assigned students!'}]}
                 >
-                    <Input
-                        autoComplete='off'
-                        placeholder="Name"/>
+                  <Checkbox.Group options={studentOptions} />  
                 </Form.Item>
                 <Form.Item
                     label={'Project IDs'}
