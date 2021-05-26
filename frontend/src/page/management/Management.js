@@ -31,8 +31,18 @@ const Management=()=>{
     complete: false,
     error: false
   })
+
   
-  const [studentOptions, setStudentOptions] = useState([]) // a Modalnak már úgy adom át, ahogy a checkbox group fogyasztja
+  const [projectList, setProjectList] = useState({
+    data: null,
+    complete: false,
+    error: false
+  })
+
+  // a Modalnak már úgy adom át, ahogy a checkbox group fogyasztja
+  
+  const [studentOptions, setStudentOptions] = useState([])
+  const [projectOptions, setProjectOptions] = useState([])
 
     // Student lista {[id]: "Firstname Lastname"}
 
@@ -65,6 +75,37 @@ const Management=()=>{
       []
     )
 
+        // Project lista {[id]: "Name"}
+
+        useEffect(
+          () => {
+            const getProjects = async () => {
+              let projectsByID = {};
+            try {
+              const res = await axios.get('api/project');
+              console.log(Object.entries(res.data.projects))
+              Object.entries(res.data.projects).map(entry => projectsByID[entry[1].id] = entry[1].name)
+              console.log(projectsByID);
+              setProjectList({
+                data: projectsByID,
+                error: false,
+                complete: true
+              })
+            } catch (err) {
+              console.log(err)
+              setLoader(false)
+              setProjectList({
+                data: null,
+                error: true,
+                complete: true
+              })
+            }
+          };
+          getProjects();
+          },
+          []
+        )
+
     // checkbox group student options elkészítése
 
     useEffect(
@@ -76,7 +117,17 @@ const Management=()=>{
         setStudentOptions(studentsToOptions)
       }, [studentList]
     )
-    
+    // checkbox group project options elkészítése
+
+    useEffect(
+      () => {
+        if (!projectList.data) {return}
+        const projectsToOptions = []
+        Object.keys(projectList.data).map(key => projectsToOptions.push({"label": projectList.data[key], "value": key}))
+        console.log(projectsToOptions)
+        setProjectOptions(projectsToOptions)
+      }, [projectList]
+    )    
 
     // Új management hozzáadása gombra kattintás
     const onClickAddNewManagement=()=>{
@@ -107,9 +158,9 @@ const Management=()=>{
                 </Row>
             </Header>
             <Content className="content">
-                <ListManagement reloadListTrigger={reloadListTrigger} studentList={studentList}/>
-                { studentOptions ?
-                  <AddManagementModal visible={showModal} onClickCancel={onClickCancel} onDone={onDone} studentOptions={studentOptions}/>
+                <ListManagement reloadListTrigger={reloadListTrigger} studentList={studentList} projectList={projectList}/>
+                { studentOptions && projectOptions ?
+                  <AddManagementModal visible={showModal} onClickCancel={onClickCancel} onDone={onDone} studentOptions={studentOptions} projectOptions={projectOptions}/>
                   : ''
                 }
             </Content>
@@ -118,7 +169,7 @@ const Management=()=>{
 }
 
 // Managementek listázása
-const ListManagement =({reloadListTrigger, studentList})=>{
+const ListManagement =({reloadListTrigger, studentList, projectList})=>{
     const [trigger, setTrigger] = useState()
     const [loader, setLoader] = useState(true)
 
@@ -199,7 +250,9 @@ const ListManagement =({reloadListTrigger, studentList})=>{
                     list.data &&
                     list.data.managements.length &&
                     studentList.complete &&
-                    studentList.data)
+                    studentList.data &&
+                    projectList.complete &&
+                    projectList.data)
                     ?
                     <List
                         bordered
@@ -210,7 +263,7 @@ const ListManagement =({reloadListTrigger, studentList})=>{
                                     {JSON.parse(`[${item.student_ids}]`).map(id => <p key={`student${id}`}>{studentList.data[id]}</p>)}
                                 </Typography.Text>
                                 <Typography.Text>
-                                    {item.project_ids}
+                                    {JSON.parse(`[${item.project_ids}]`).map(id => <p key={`project${id}`}>{projectList.data[id]}</p>)}
                                 </Typography.Text>
                                 <Button 
                                     type="primary"
@@ -233,20 +286,20 @@ const AddManagementModal=({
     visible,
     onClickCancel,
     onDone,
-    studentOptions
+    studentOptions,
+    projectOptions
 })=>{
     const [form] = Form.useForm()
 
     const onClickSave=()=>{
         form
         .validateFields()
-        .then(values => console.log(values)) 
-        /*.then(values => {
+        .then(values => {
             saveManagement({
                 student_ids: values.student_ids,
                 project_ids: values.project_ids
             })
-        })*/
+        })
         .catch(info => {
             console.log('Validate Failed:', info)
         })
@@ -299,9 +352,7 @@ const AddManagementModal=({
                     name="project_ids"
                     rules={[{required: true, message: 'Please tick assigned projects!'}]}
                 >
-                    <Input
-                        autoComplete='off'
-                        placeholder="Description"/>
+                  <Checkbox.Group options={projectOptions} />  
                 </Form.Item>
             </Form>
         </Modal>
