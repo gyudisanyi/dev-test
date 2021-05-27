@@ -21,7 +21,22 @@ const sequelize = new Sequelize(
 
 const db = {
     sequelize: sequelize,
-    DataType: Sequelize
+    DataType: Sequelize,
 }
+
+
+
+/*
+StudentModel.belongsToMany(Project, {
+  through: "project_tag",
+  as: "projects",
+  foreignKey: "project_id"
+})
+
+ProjectModel.belongsToMany(Student, {
+  through: "student_tag",
+  as: "students",
+  foreignKey: "student_id"
+})*/
 
 export default db

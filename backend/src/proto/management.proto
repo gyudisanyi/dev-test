@@ -1,13 +1,14 @@
 syntax = "proto3";
 package management;
 
-service ManagementService {
-   rpc List (Empty) returns (ManagementList) {}
-   rpc Create (Management) returns (Management) {}
-   rpc Read (ManagementRequestId) returns (Management) {}
+service ManagementStudentService {
    rpc Update (Management) returns (Empty) {}
-   rpc Delete (ManagementRequestId) returns (Empty) {}
 }
+
+service ManagementProjectService {
+  rpc Update (Management) returns (Empty) {}
+}
+
 message Empty {}
 message Management {
    string id = 1;
@@ -16,9 +17,7 @@ message Management {
    string createdAt = 4;
    string updatedAt = 5;
 }
-message ManagementList {
-   repeated Management managements = 1;
-}
+
 message ManagementRequestId {
    string id = 1;
 }

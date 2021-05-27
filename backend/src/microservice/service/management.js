@@ -3,7 +3,8 @@ import * as grpc from '@grpc/grpc-js'
 const protoLoader = require("@grpc/proto-loader")
 import config from '../../config/service'
 import db from '../database/connect'
-import ManagementModel from '../database/model/management'
+import StudentModel from '../database/model/student'
+import ProjectModel from '../database/model/project'
 const PROTO_PATH = path.join(__dirname, '../../proto/management.proto')
 
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
@@ -15,84 +16,34 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 })
 
 // Load in our service definition
-const managementProto = grpc.loadPackageDefinition(packageDefinition).management
+const proto = grpc.loadPackageDefinition(packageDefinition).management
 const server = new grpc.Server()
 
-const managementModel = ManagementModel(db)
+const studentModel = StudentModel(db)
+const projectModel = ProjectModel(db)
 
-// Implement the list function
-const List = async (call, callback) => {
-    //const Op = db.DataType.Op
-    //const condition = first_name ? { first_name: { [Op.like]: `%${first_name}%` } } : null;
+studentModel.belongsToMany(projectModel, {
+  through: "management",
+  as: "projects",
+  foreignKey: "project_id"
+});
 
-    // Ügyek listázása adatbázisból
-    try{
-        //const result = await managementModel.findAll({ where: condition })
-        const result = await managementModel.findAll()
-        callback(null, {managements: result})
-    }
-    catch(err){
-        callback({
-            code: grpc.status.ABORTED,
-            details: "Aborted"
-        })
-    }
-}
-// Implement the insert function
-const Create = async (call, callback) => {
-    let management = call.request
-    try{
-        let result = await managementModel.create(management)
-        callback(null, result)
-    }catch(err){
-        switch(err.name) {
-            case 'SequelizeUniqueConstraintError':
-                let jsErr = new Error('ALREADY_EXISTS')
-                jsErr.code = grpc.status.ALREADY_EXISTS
-                jsErr.metadata = dbErrorCollector({errors: err.errors})
-                callback(jsErr)
-                break
-            default:
-                callback({
-                    code: grpc.status.ABORTED,
-                    details: "ABORTED"
-                })
-        }
-    }
-}
-// Implement the read function
-const Read = async (call, callback) => {
-    let id = call.request.id
-    // data validation
-    // ...
-    // Ügy mentése adatbázisba
-    try{
-        let result = await managementModel.findByPk(id)
-        if(result){
-            callback(null, result)
-        }
-        else{
-            callback({
-                code: grpc.status.NOT_FOUND,
-                details: "Not found"
-            })
-        }
-    }catch(err){
-        callback({
-            code: grpc.status.ABORTED,
-            details: "Aborted"
-        })
-    }
-}
+projectModel.belongsToMany(studentModel, {
+  through: "management",
+  as: "students",
+  foreignKey: "student_id"
+})
+
+// Only update function makes sense
+
 // Implement the update function
 const Update = async (call, callback) => {
     let management = call.request
-    console.log(management, "UPD")
+    
     try{
         let affectedRows = await managementModel.update(
             {
-                "student_ids":  management.student_ids, 
-                "project_ids":    management.project_ids
+                "ids":  management.ids, 
             },
             {
                 where: { id: management.id }
@@ -100,27 +51,6 @@ const Update = async (call, callback) => {
         )
         if(affectedRows[0]){
             callback(null, affectedRows)
-        }
-        else{
-            callback({
-                code: grpc.status.NOT_FOUND,
-                details: "Not found"
-            })
-        }
-    }catch(err){
-        callback({
-            code: grpc.status.ABORTED,
-            details: "Aborted"
-        })
-    }
-}
-// Implement the delete function
-const Delete = async (call, callback) => {
-    let id = call.request.id
-    try{
-        let result = await managementModel.destroy({ where: { "id": id } })
-        if(result){
-            callback(null, result)
         }
         else{
             callback({
@@ -146,14 +76,11 @@ const dbErrorCollector=({
     return metadata
 }
 const exposedFunctions = {
-    List,
-    Create,
-    Read,
-    Update,
-    Delete
+    Update
 }
 
-server.addService(managementProto.ManagementService.service, exposedFunctions)
+server.addService(proto.ManagementStudentService.service, exposedFunctions)
+server.addService(proto.ManagementProjectService.service, exposedFunctions)
 server.bindAsync(config.management.host +':'+ config.management.port, grpc.ServerCredentials.createInsecure(), (error)=>{ throw error;})
 
 db.sequelize.sync().then(() => {

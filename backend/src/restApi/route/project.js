@@ -1,6 +1,7 @@
 import express from 'express'
 const router = express.Router()
 import project from '../controller/project'
+import management from '../controller/management'
 
 // Classic CRUD solution
 // Function	    Request Method
@@ -15,6 +16,8 @@ import project from '../controller/project'
 router.get('/', project.list)
 // POST request for create an item
 router.post('/', project.validationRules('create'), project.validate, project.create)
+// PUT request for project association
+router.put('/associate/:id', management.associateStudents)
 // GET request for read an item by id
 router.get('/:id', project.read)
 // PUT request for update an item by id
