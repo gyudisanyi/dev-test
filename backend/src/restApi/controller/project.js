@@ -117,7 +117,6 @@ exports.read = async (req, res, next) => {
 
 const projectUpdate = (options) => {
     return new Promise((resolve, reject) => {
-      console.log({options})
       client.Update(options, (error, response) => {
             if (error) { reject(error) }
             resolve(response)

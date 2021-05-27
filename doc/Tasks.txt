@@ -67,6 +67,9 @@ lett: 2 óra, nemigen volt elakadás, de a db "project.description" és a több 
   lett: 2.5 óra.
 
 6. Üzemeltetés (to be continued)
-    
+
+## helyett javítás:
+4.4 many to many táblát definiálok sequelize-ban a managementeknek. - tipp: ?
+    ## tippet írni nem mentem, de több lett. Két óra alatt nyomon vagyok :)
 
 

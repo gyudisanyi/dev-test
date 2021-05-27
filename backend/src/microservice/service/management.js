@@ -20,79 +20,14 @@ const server = new grpc.Server()
 
 const managementModel = ManagementModel(db)
 
-// Implement the list function
-const List = async (call, callback) => {
-    //const Op = db.DataType.Op
-    //const condition = first_name ? { first_name: { [Op.like]: `%${first_name}%` } } : null;
-
-    // Ügyek listázása adatbázisból
-    try{
-        //const result = await managementModel.findAll({ where: condition })
-        const result = await managementModel.findAll()
-        callback(null, {managements: result})
-    }
-    catch(err){
-        callback({
-            code: grpc.status.ABORTED,
-            details: "Aborted"
-        })
-    }
-}
-// Implement the insert function
-const Create = async (call, callback) => {
-    let management = call.request
-    try{
-        let result = await managementModel.create(management)
-        callback(null, result)
-    }catch(err){
-        switch(err.name) {
-            case 'SequelizeUniqueConstraintError':
-                let jsErr = new Error('ALREADY_EXISTS')
-                jsErr.code = grpc.status.ALREADY_EXISTS
-                jsErr.metadata = dbErrorCollector({errors: err.errors})
-                callback(jsErr)
-                break
-            default:
-                callback({
-                    code: grpc.status.ABORTED,
-                    details: "ABORTED"
-                })
-        }
-    }
-}
-// Implement the read function
-const Read = async (call, callback) => {
-    let id = call.request.id
-    // data validation
-    // ...
-    // Ügy mentése adatbázisba
-    try{
-        let result = await managementModel.findByPk(id)
-        if(result){
-            callback(null, result)
-        }
-        else{
-            callback({
-                code: grpc.status.NOT_FOUND,
-                details: "Not found"
-            })
-        }
-    }catch(err){
-        callback({
-            code: grpc.status.ABORTED,
-            details: "Aborted"
-        })
-    }
-}
 // Implement the update function
-const Update = async (call, callback) => {
+const associateProjects = async (call, callback) => {
     let management = call.request
-    console.log(management, "UPD")
+    console.log("TYAAA", management, JSON.parse("["+management.ids+"]"))
     try{
-        let affectedRows = await managementModel.update(
+        let affectedRows = await managementModel.addProjects(
             {
-                "student_ids":  management.student_ids, 
-                "project_ids":    management.project_ids
+                "ids":    management.ids
             },
             {
                 where: { id: management.id }
@@ -100,27 +35,6 @@ const Update = async (call, callback) => {
         )
         if(affectedRows[0]){
             callback(null, affectedRows)
-        }
-        else{
-            callback({
-                code: grpc.status.NOT_FOUND,
-                details: "Not found"
-            })
-        }
-    }catch(err){
-        callback({
-            code: grpc.status.ABORTED,
-            details: "Aborted"
-        })
-    }
-}
-// Implement the delete function
-const Delete = async (call, callback) => {
-    let id = call.request.id
-    try{
-        let result = await managementModel.destroy({ where: { "id": id } })
-        if(result){
-            callback(null, result)
         }
         else{
             callback({
@@ -146,11 +60,7 @@ const dbErrorCollector=({
     return metadata
 }
 const exposedFunctions = {
-    List,
-    Create,
-    Read,
-    Update,
-    Delete
+    associateProjects,
 }
 
 server.addService(managementProto.ManagementService.service, exposedFunctions)

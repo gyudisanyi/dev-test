@@ -1,3 +1,7 @@
+import StudentModel from './student'
+import ProjectModel from './project'
+import db from '../connect'
+
 const ManagementModel = ({
     sequelize, 
     DataType
@@ -9,15 +13,21 @@ const ManagementModel = ({
       primaryKey: true, 
       autoIncrement: true
     },
-    student_ids: {
-      type: STRING,
-      allowNull: true
-    },
-    project_ids: {
-      type: STRING,
-      allowNull: true
-    }
   })
+
+    
+  StudentModel(db).belongsToMany(ProjectModel(db), {
+    "through": "management",
+    "as": "projects",
+    "foreignKey": "student_id"
+  })
+
+  ProjectModel(db).belongsToMany(StudentModel(db), {
+    "through": "management",
+    "as": "students",
+    "foreignKey": "project_id"
+  })
+
   return Management;
 }
   
