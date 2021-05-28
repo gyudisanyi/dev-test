@@ -42,6 +42,54 @@ console.log({grpc})
 const managementProto = grpc.loadPackageDefinition(packageDefinition).management
 const client = new managementProto.ManagementService(config.management.host +':'+ config.management.port, grpc.credentials.createInsecure())
 
+const getProjects = (options) => {
+  return new Promise((resolve, reject) => {
+    client.getProjects(options, (error, response) => {
+          if (error) { reject(error) }
+          resolve(response)
+      })
+  })
+}
+
+exports.getProjects = async (req, res, next) => {
+  try{
+      const student = await getProjects({id: req.params.id})
+      res.status(200).json({id: req.params.id})
+  } catch(e){
+    console.log({e})
+      if(e.details === 'Not found'){
+          res.status(204).json(e)
+      }
+      else{
+          res.status(500).json(e)
+      }
+  }
+}
+
+const getStudents = (options) => {
+  return new Promise((resolve, reject) => {
+    client.getStudents(options, (error, response) => {
+          if (error) { reject(error) }
+          resolve(response)
+      })
+  })
+}
+
+exports.getStudents = async (req, res, next) => {
+  try{
+      const project = await getStudents({id: req.params.id})
+      res.status(200).json({id: req.params.id})
+  } catch(e){
+    console.log({e})
+      if(e.details === 'Not found'){
+          res.status(204).json(e)
+      }
+      else{
+          res.status(500).json(e)
+      }
+  }
+}
+
 const associateProjects = (options) => {
     return new Promise((resolve, reject) => {
       client.associateProjects(options, (error, response) => {
@@ -64,4 +112,28 @@ exports.associateProjects = async (req, res, next) => {
             res.status(500).json(e)
         }
     }
+}
+
+const associateStudents = (options) => {
+  return new Promise((resolve, reject) => {
+    client.associateStudents(options, (error, response) => {
+          if (error) { reject(error) }
+          resolve(response)
+      })
+  })
+}
+
+exports.associateStudents = async (req, res, next) => {
+  try{
+      const student = await associateStudents({id: req.params.id, ids: req.body.ids})
+      res.status(200).json({id: req.params.id})
+  } catch(e){
+    console.log({e})
+      if(e.details === 'Not found'){
+          res.status(204).json(e)
+      }
+      else{
+          res.status(500).json(e)
+      }
+  }
 }

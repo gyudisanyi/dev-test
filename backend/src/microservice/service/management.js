@@ -20,17 +20,72 @@ const server = new grpc.Server()
 
 const managementModel = ManagementModel(db)
 
-// Implement the update function
+// Implement getter functions
+
+
+const getProjects = async (call, callback) => {
+  let management = call.request
+  console.log(management)
+  try{
+      let affectedRows = await managementModel.getProjects(
+          {
+              "id":     management.id 
+          }
+      )
+      console.log({affectedRows})
+      if(affectedRows[0]){
+          callback(null, affectedRows)
+      }
+      else{
+          callback({
+              code: grpc.status.NOT_FOUND,
+              details: "Not found"
+          })
+      }
+  }catch(err){
+    console.log(err)
+      callback({
+          code: grpc.status.ABORTED,
+          details: "Aborted"
+      })
+  }
+}
+
+
+const getStudents = async (call, callback) => {
+  let management = call.request
+  try{
+      let affectedRows = await managementModel.getStudents(
+          {
+              "id":     management.id 
+          }
+      )
+      if(affectedRows[0]){
+          callback(null, affectedRows)
+      }
+      else{
+          callback({
+              code: grpc.status.NOT_FOUND,
+              details: "Not found"
+          })
+      }
+  }catch(err){
+    console.log(err)
+      callback({
+          code: grpc.status.ABORTED,
+          details: "Aborted"
+      })
+  }
+}
+
+// Implement the update functions
 const associateProjects = async (call, callback) => {
     let management = call.request
-    console.log("TYAAA", management, JSON.parse("["+management.ids+"]"))
     try{
         let affectedRows = await managementModel.addProjects(
             {
-                "ids":    management.ids
-            },
-            {
-                where: { id: management.id }
+                "ids":    management.ids,
+                "id":     management.id 
             }
         )
         if(affectedRows[0]){
@@ -43,11 +98,38 @@ const associateProjects = async (call, callback) => {
             })
         }
     }catch(err){
+      console.log(err)
         callback({
             code: grpc.status.ABORTED,
             details: "Aborted"
         })
     }
+}
+const associateStudents = async (call, callback) => {
+  let management = call.request
+  try{
+      let affectedRows = await managementModel.addStudents(
+          {
+              "ids":    management.ids,
+              "id":     management.id 
+          }
+      )
+      if(affectedRows[0]){
+          callback(null, affectedRows)
+      }
+      else{
+          callback({
+              code: grpc.status.NOT_FOUND,
+              details: "Not found"
+          })
+      }
+  }catch(err){
+    console.log(err)
+      callback({
+          code: grpc.status.ABORTED,
+          details: "Aborted"
+      })
+  }
 }
 // Collect errors
 const dbErrorCollector=({
@@ -60,7 +142,10 @@ const dbErrorCollector=({
     return metadata
 }
 const exposedFunctions = {
+    getProjects,
+    getStudents,
     associateProjects,
+    associateStudents,
 }
 
 server.addService(managementProto.ManagementService.service, exposedFunctions)

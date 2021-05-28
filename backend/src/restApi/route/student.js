@@ -22,6 +22,8 @@ router.get('/:id', student.read)
 router.put('/:id', student.update)
 // PUT request for update a student by id with associated projects
 router.put('/manage/:id', management.validationRules('update'), management.validate, management.associateProjects)
+// GET request for update a student by id with associated projects
+router.get('/manage/:id', management.getProjects)
 // DELETE request for delete item by id
 router.delete('/:id', student.delete)
 export default router
