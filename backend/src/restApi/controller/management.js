@@ -53,8 +53,8 @@ const getProjects = (options) => {
 
 exports.getProjects = async (req, res, next) => {
   try{
-      const student = await getProjects({id: req.params.id})
-      res.status(200).json({id: req.params.id})
+      const projects = await getProjects({id: req.params.id})
+      res.status(200).json(projects)
   } catch(e){
     console.log({e})
       if(e.details === 'Not found'){
@@ -76,9 +76,11 @@ const getStudents = (options) => {
 }
 
 exports.getStudents = async (req, res, next) => {
+  
+  console.log("GET STUDENTS")
   try{
-      const project = await getStudents({id: req.params.id})
-      res.status(200).json({id: req.params.id})
+      const students = await getStudents({id: req.params.id})
+      res.status(200).json(students)
   } catch(e){
     console.log({e})
       if(e.details === 'Not found'){

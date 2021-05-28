@@ -65,6 +65,19 @@ const ManagementModel = ({
     return await project.setStudents(JSON.parse("["+ids+"]"))
   }
 
+  
+  Management.getStudents = async ({id, ids}) => {
+    console.log(id)
+    const project = await Project.findByPk(id,
+      {include: [
+        {
+          model: Student,
+        }
+      ]}
+      )
+    return await project.getStudents()
+  }
+
   return Management;
 }
   

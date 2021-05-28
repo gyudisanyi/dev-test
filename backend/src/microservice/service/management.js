@@ -25,16 +25,14 @@ const managementModel = ManagementModel(db)
 
 const getProjects = async (call, callback) => {
   let management = call.request
-  console.log(management)
   try{
-      let affectedRows = await managementModel.getProjects(
+      let result = await managementModel.getProjects(
           {
               "id":     management.id 
           }
       )
-      console.log({affectedRows})
-      if(affectedRows[0]){
-          callback(null, affectedRows)
+      if(result[0]){
+        callback(null, {projects: result})
       }
       else{
           callback({
@@ -55,13 +53,13 @@ const getProjects = async (call, callback) => {
 const getStudents = async (call, callback) => {
   let management = call.request
   try{
-      let affectedRows = await managementModel.getStudents(
+      let result = await managementModel.getStudents(
           {
               "id":     management.id 
           }
       )
-      if(affectedRows[0]){
-          callback(null, affectedRows)
+      if(result[0]){
+          callback(null, {students: result})
       }
       else{
           callback({

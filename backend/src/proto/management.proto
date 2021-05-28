@@ -4,20 +4,31 @@ package management;
 service ManagementService {
    rpc associateProjects (Management) returns (Management) {}
    rpc associateStudents (Management) returns (Management) {}
-   rpc getProjects (Management) returns (IDs) {}
-   rpc getStudents (Management) returns (IDs) {}
+   rpc getProjects (Management) returns (Projects) {}
+   rpc getStudents (Management) returns (Students) {}
 }
 message Empty {}
 message Management {
    string id = 1;
    string ids = 2;
 }
-message ID {
-    string id = 1;
+message Project {
+   string id = 1;
+   string name = 2;
 }
 
-message IDs {
-  repeated ID IDs = 1;
+message Projects {
+   repeated Project projects = 1;
+}
+
+message Student {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+}
+
+message Students {
+  repeated Student students = 1;
 }
 
 message ManagementRequestId {
