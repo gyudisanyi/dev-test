@@ -5,7 +5,8 @@
   "author": "Roland Goreczky Automizy Inc.",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "webpack  --host 0.0.0.0 --config ./webpack.config.js --mode development"
+    "start": "webpack-dev-server --host localhost --mode development --config webpack.config.js",
+    "start:dev": "webpack-dev-server  --host 0.0.0.0 --config ./webpack.config.js --mode development"
   },
   "dependencies": {
     "antd": "^4.2.5",

@@ -72,8 +72,12 @@ lett: 2 óra, nemigen volt elakadás, de a db "project.description" és a több 
 4.4 many to many táblát definiálok sequelize-ban a managementeknek. - tipp: ?
     ## tippet írni nem mentem, de több lett. Két óra alatt nyomon vagyok :)
     ## ...és további három óra alatt megzaboláztam.
+    ## ...és még egy óra volt, mire egy fura bugot (újabban létrehozott studentekkel, projektekkel nem tud mit kezdeni) kiirtottam,
+          sync({force: true}) a barátom lett, sequelizet kénytelen voltam jobban megismerni, elnevezések, konzolböngészés,
+          gyakorlatilag ugyanoda jutottam, ahol voltam, de a funkciósorrendek megfelelők. $ cd frontin
 
 5.1 Az előző javítás folyományaképpen a Management modul frontendjét átalakítom. Tipp: 1 óra
       Elképzelés: két fül lesz: Manage students és Manage projects - a megfelelőt listázza és az asszociációk transferrel.
+      De: a feladatkiírás egy fület kér. Akkor ott lesz egy students/projects radio az "add new" gomb helyén.
 
 
