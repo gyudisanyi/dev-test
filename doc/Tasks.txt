@@ -79,5 +79,5 @@ lett: 2 óra, nemigen volt elakadás, de a db "project.description" és a több 
 5.1 Az előző javítás folyományaképpen a Management modul frontendjét átalakítom. Tipp: 1 óra
       Elképzelés: két fül lesz: Manage students és Manage projects - a megfelelőt listázza és az asszociációk transferrel.
       De: a feladatkiírás egy fület kér. Akkor ott lesz egy students/projects radio az "add new" gomb helyén.
-
-
+    
+    lett: 2 óra. A transfert ki kellett ókumálni, paraméterezett Modal, DRY project/student kezelés.
