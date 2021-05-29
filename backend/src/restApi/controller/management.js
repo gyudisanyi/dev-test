@@ -77,7 +77,6 @@ const getStudents = (options) => {
 
 exports.getStudents = async (req, res, next) => {
   
-  console.log("GET STUDENTS")
   try{
       const students = await getStudents({id: req.params.id})
       res.status(200).json(students)

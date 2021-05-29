@@ -80,10 +80,10 @@ const getStudents = async (call, callback) => {
 const associateProjects = async (call, callback) => {
     let management = call.request
     try{
-        let affectedRows = await managementModel.addProjects(
+        let affectedRows = await managementModel.setProjects(
             {
-                "ids":    management.ids,
-                "id":     management.id 
+                "id":     management.id,        // student ID
+                "ids":    management.ids,       // hozzárendelendő project ID-k
             }
         )
         if(affectedRows[0]){
@@ -106,10 +106,10 @@ const associateProjects = async (call, callback) => {
 const associateStudents = async (call, callback) => {
   let management = call.request
   try{
-      let affectedRows = await managementModel.addStudents(
+      let affectedRows = await managementModel.setStudents(
           {
-              "ids":    management.ids,
-              "id":     management.id 
+              "id":     management.id,      // project ID
+              "ids":    management.ids,     // hozzárendelendő student ID-k
           }
       )
       if(affectedRows[0]){
@@ -149,7 +149,7 @@ const exposedFunctions = {
 server.addService(managementProto.ManagementService.service, exposedFunctions)
 server.bindAsync(config.management.host +':'+ config.management.port, grpc.ServerCredentials.createInsecure(), (error)=>{ throw error;})
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync({}).then(() => {
     console.log("Re-sync db.")
     server.start()
     console.log('Server running at ' + config.management.host +':'+ config.management.port)

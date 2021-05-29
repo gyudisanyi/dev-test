@@ -21,7 +21,7 @@ const ProjectModel = ({
       type: DATE,
       defaultValue: NOW
     }
-  })
+  },)
   return Project;
 }
   

@@ -27,7 +27,7 @@ const StudentModel = ({
       type: DATE,
       defaultValue: NOW
     }
-  })
+  }, )
   return Student;
 }
   
