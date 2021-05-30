@@ -11,16 +11,13 @@ import {
   Button,
   Modal,
   message,
-  Form,
   Radio,
   Transfer
 } from 'antd'
 const { Title } = Typography
 const { Header, Content } = Layout
 const { confirm } = Modal
-import { ExclamationCircleOutlined } from '@ant-design/icons'
 import "../../layout/Layout.css"
-import { student } from '../../../../backend/src/config/service'
 
 const Management = () => {
   const [reloadListTrigger, setReloadListTrigger] = useState(null)

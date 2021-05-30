@@ -81,3 +81,10 @@ lett: 2 óra, nemigen volt elakadás, de a db "project.description" és a több 
       De: a feladatkiírás egy fület kér. Akkor ott lesz egy students/projects radio az "add new" gomb helyén.
     
     lett: 2 óra. A transfert ki kellett ókumálni, paraméterezett Modal, DRY project/student kezelés.
+
+6. Üzemeltetés
+  6.1 Frontend dockerbe - tipp: egy óra.
+  ## lett: egy óra, de konzolhibát ad: GET http://localhost:8080/sockjs-node/info?t=1622369556001 net::ERR_CONNECTION_REFUSED
+      --- működik így is, visszatérek rá. (valami development mode info lehet?)
+  6.2 REST dockerbe - tipp: ?
+  6.3 Mikroservice-ek dockerbe - tipp: ?

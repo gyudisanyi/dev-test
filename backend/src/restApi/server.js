@@ -7,8 +7,8 @@ const port = process.env.PORT || 3000
 
 app.use(  
    cors({
-      origin: "http://localhost:8080", // restrict calls to those this address
-      methods: "GET, POST, OPTIONS, PUT, PATCH, DELETE" // only allow GET requests
+      origin: "*", // calls from all origins permitted
+      methods: "GET, POST, OPTIONS, PUT, PATCH, DELETE" // only allow these requests
    })
 )
 
