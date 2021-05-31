@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "webpack-dev-server --host localhost --mode development --config webpack.config.js",
-    "start:docker": "webpack-dev-server  --host 0.0.0.0 --config ./webpack.config.js --mode development"
+    "start:docker": "webpack-dev-server --host 0.0.0.0 --disable-host-check --config ./webpack.config.js --mode development"
   },
   "dependencies": {
     "antd": "^4.2.5",

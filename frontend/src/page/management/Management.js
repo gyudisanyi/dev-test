@@ -147,7 +147,7 @@ const ListManagement = ({ reloadListTrigger, setReloadListTrigger, studentList, 
     () => {
       setLoader(true)
       setList({
-        data: list.data,
+        data: null,
         error: false,
         complete: false
       })

@@ -88,3 +88,16 @@ lett: 2 óra, nemigen volt elakadás, de a db "project.description" és a több 
       --- működik így is, visszatérek rá. (valami development mode info lehet?)
   6.2 REST dockerbe - tipp: ?
   6.3 Mikroservice-ek dockerbe - tipp: ?
+
+  ## Mivel a backend dockeresítésről nem tudom, meddig fog tartani,
+      inkább előbb megoldom ezt a fenti konzolhibát, ami kész, az legyen jó. Kiiktattam egy másik nem halálos de ciki hibát (listát nullázni kell)
+    ## --- a forrása hamar meglett (nem a fenti tipp), hamar lecseréltem egy másik (hasonlóan ártalmatlan) hibára, úgy tűnt, a build lesz a leglassabb ebben a műveletben,
+            de közben valahogyan kinyírtam a dockeremet, factory reset, reboot és hasonló tudományos módszerek segítettek.
+    ## buildek közben megfogalmazom a 6.2 és 6.3 feladatok kivitelezését.
+  
+  6.2+3 REST és mikrók dockerbe. Egy docker legyen egy könyvtár alapján - szétkapom a mostani vázat (git branch-pozitív).
+      REST könyvtár: megkapja a proto könyvtárat és a config/service.js -t.
+      Mikrók: saját könyvtárat kapnak a microservice könyvtáron belül,
+        pl. ms/studentmicro: megkapja a config könyvtárat (service-ből csak a rá vonatkozó),
+        megkapja a database/connect.js -t, a saját modeljét és persze a student.js -t. Másik kettő is eszerint.
+    
