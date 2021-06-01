@@ -7,10 +7,10 @@ COPY package*.json ./
 RUN yarn install --network-timeout 1000000
 
 COPY ./src/config ./src/config
-COPY ./src/proto/student.proto ./src/proto/student.proto
+COPY ./src/proto/project.proto ./src/proto/project.proto
 COPY ./src/microservice/database ./src/microservice/database
-COPY ./src/microservice/service/student.js ./src/microservice/service/student.js
+COPY ./src/microservice/service/project.js ./src/microservice/service/project.js
 
-EXPOSE 50053
+EXPOSE 50054
 
-CMD ["yarn", "start:micro:student"]
+CMD ["yarn", "start:micro:project"]

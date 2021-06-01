@@ -1,6 +1,7 @@
 import express from 'express'
 import router from './route/router'
 import cors from 'cors'
+import {} from 'dotenv/config.js';
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -22,6 +23,9 @@ app.use("/api", router)
 app.get("*", function(req, res) {
    res.send("App works!")
 })
+
+const env=process.env.DOCKER_BRIDGE_NETWORK_IP
+console.log("YO", {env})
 
 app.listen(port, function() {
    console.log('Server started on port: ' + port);
