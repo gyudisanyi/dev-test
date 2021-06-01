@@ -41,7 +41,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 console.log({grpc})
 const projectProto = grpc.loadPackageDefinition(packageDefinition).project
 console.log({projectProto})
-const client = new projectProto.ProjectService(config.project.host +':'+ config.project.port, grpc.credentials.createInsecure())
+const client = new projectProto.ProjectService(process.env.DOCKER_BRIDGE_NETWORK_IP || '192.168.16.1'  +':'+ config.project.port, grpc.credentials.createInsecure())
 
 const projectList = (options) => {
     return new Promise((resolve, reject) => {

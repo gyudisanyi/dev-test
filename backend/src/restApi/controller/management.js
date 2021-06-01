@@ -40,7 +40,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 // Load in our service definition
 console.log({grpc})
 const managementProto = grpc.loadPackageDefinition(packageDefinition).management
-const client = new managementProto.ManagementService(config.management.host +':'+ config.management.port, grpc.credentials.createInsecure())
+const client = new managementProto.ManagementService(process.env.DOCKER_BRIDGE_NETWORK_IP || '192.168.16.1'  +':'+ config.management.port, grpc.credentials.createInsecure())
 
 const getProjects = (options) => {
   return new Promise((resolve, reject) => {

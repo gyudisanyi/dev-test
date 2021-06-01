@@ -9,7 +9,8 @@
     "start:micro:student": "babel-node src/microservice/service/student.js",
     "start:micro:project": "babel-node src/microservice/service/project.js",
     "start:micro:management": "babel-node src/microservice/service/management.js",
-    "start:micro": "concurrently --kill-others \"babel-node src/microservice/service/student.js\" \"babel-node src/microservice/service/project.js\" \"babel-node src/microservice/service/management.js\""
+    "start:micro": "concurrently --kill-others \"babel-node src/microservice/service/student.js\" \"babel-node src/microservice/service/project.js\" \"babel-node src/microservice/service/management.js\"",
+    "dockerize": "docker compose up -d && docker network create --driver bridge rest-micro-db && docker network connect rest-micro-db devtest-rest && docker network connect rest-micro-db devtest-micro-student && docker network connect rest-micro-db devtest-micro-project && docker network connect rest-micro-db devtest-micro-management && docker network connect rest-micro-db database_db_1"
   },
   "babel": {
     "presets": [
@@ -27,6 +28,7 @@
     "@grpc/grpc-js": "^1.3.2",
     "@grpc/proto-loader": "^0.5.4",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.5.0",
     "mysql2": "^2.1.0",

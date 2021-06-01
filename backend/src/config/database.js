@@ -1,6 +1,6 @@
 module.exports={
     database: {
-        HOST: "127.0.0.1",
+        HOST: "192.168.16.1", // user-defined bridge network ip address
         USER: "root",
         PASSWORD: "root",
         DB: "app",
