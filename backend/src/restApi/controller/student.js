@@ -42,11 +42,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 // Load in our service definition
 console.log({grpc})
 const studentProto = grpc.loadPackageDefinition(packageDefinition).student
-<<<<<<< Updated upstream
-const client = new studentProto.StudentService(config.student.host +':'+ config.student.port, grpc.credentials.createInsecure())
-=======
 const client = new studentProto.StudentService(process.env.LOCAL_IP || 'devtest-micro-student' + ':' + config.student.port, grpc.credentials.createInsecure())
->>>>>>> Stashed changes
 
 const studentList = (options) => {
     return new Promise((resolve, reject) => {

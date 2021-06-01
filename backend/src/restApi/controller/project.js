@@ -41,11 +41,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 console.log({grpc})
 const projectProto = grpc.loadPackageDefinition(packageDefinition).project
 console.log({projectProto})
-<<<<<<< Updated upstream
-const client = new projectProto.ProjectService(config.project.host +':'+ config.project.port, grpc.credentials.createInsecure())
-=======
 const client = new projectProto.ProjectService(process.env.LOCAL_IP || 'devtest-micro-project' + ':' + config.project.port, grpc.credentials.createInsecure())
->>>>>>> Stashed changes
 
 const projectList = (options) => {
     return new Promise((resolve, reject) => {

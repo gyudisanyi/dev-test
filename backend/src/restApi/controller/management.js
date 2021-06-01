@@ -40,12 +40,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 // Load in our service definition
 console.log({grpc})
 const managementProto = grpc.loadPackageDefinition(packageDefinition).management
-<<<<<<< Updated upstream
-const client = new managementProto.ManagementService(config.management.host +':'+ config.management.port, grpc.credentials.createInsecure())
-
-=======
 const client = new managementProto.ManagementService(process.env.LOCAL_IP || 'devtest-micro-management' + ':' + config.management.port, grpc.credentials.createInsecure())
->>>>>>> Stashed changes
 const getProjects = (options) => {
   return new Promise((resolve, reject) => {
     client.getProjects(options, (error, response) => {

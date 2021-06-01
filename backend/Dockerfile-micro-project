@@ -1,0 +1,16 @@
+FROM node:14.17.0
+
+WORKDIR /usr/
+
+COPY package*.json ./
+
+RUN yarn install --network-timeout 1000000
+
+COPY ./src/config ./src/config
+COPY ./src/proto/project.proto ./src/proto/project.proto
+COPY ./src/microservice/database ./src/microservice/database
+COPY ./src/microservice/service/project.js ./src/microservice/service/project.js
+
+EXPOSE 50054
+
+CMD ["yarn", "start:micro:project"]
