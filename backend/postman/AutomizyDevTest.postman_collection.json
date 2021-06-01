@@ -73,7 +73,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"students\": [\n        {\n            \"id\": \"1\",\n            \"first_name\": \"Ford\",\n            \"last_name\": \"Feacsrxflines\",\n            \"email\": \"foscsxrd@mail.com\",\n            \"createdAt\": \"Wed May 27 2020 21:12:16 GMT+0200 (Central European Summer Time)\",\n            \"updatedAt\": \"Wed May 27 2020 21:12:16 GMT+0200 (Central European Summer Time)\"\n        },\n        {\n            \"id\": \"9\",\n            \"first_name\": \"Ford\",\n            \"last_name\": \"Feacssrxflines\",\n            \"email\": \"fosscsxrd@mail.com\",\n            \"createdAt\": \"Wed May 27 2020 22:03:21 GMT+0200 (Central European Summer Time)\",\n            \"updatedAt\": \"Wed May 27 2020 22:03:21 GMT+0200 (Central European Summer Time)\"\n        },\n        {\n            \"id\": \"12\",\n            \"first_name\": \"Ford\",\n            \"last_name\": \"Feacssrxsflines\",\n            \"email\": \"\",\n            \"createdAt\": \"Wed May 27 2020 22:03:52 GMT+0200 (Central European Summer Time)\",\n            \"updatedAt\": \"Wed May 27 2020 22:03:52 GMT+0200 (Central European Summer Time)\"\n        },\n        {\n            \"id\": \"17\",\n            \"first_name\": \"Ford\",\n            \"last_name\": \"Fairlane\",\n            \"email\": \"ford.fairlane@mail.com\",\n            \"createdAt\": \"Wed May 27 2020 22:07:25 GMT+0200 (Central European Summer Time)\",\n            \"updatedAt\": \"Wed May 27 2020 22:07:25 GMT+0200 (Central European Summer Time)\"\n        }\n    ]\n}"
+							"body": "{\n    \"students\": [\n        {\n            \"id\": \"1\",\n            \"first_name\": \"Misi\",\n            \"last_name\": \"Mókus\",\n            \"email\": \"ceo@orokketermo.fa\",\n            \"createdAt\": \"Mon May 31 2021 15:16:15 GMT+0000 (Coordinated Universal Time)\",\n            \"updatedAt\": \"Mon May 31 2021 15:16:15 GMT+0000 (Coordinated Universal Time)\"\n        },\n        {\n            \"id\": \"3\",\n            \"first_name\": \"Dagi\",\n            \"last_name\": \"Mowkus\",\n            \"email\": \"fatty@orokketermo.fa\",\n            \"createdAt\": \"Mon May 31 2021 15:16:36 GMT+0000 (Coordinated Universal Time)\",\n            \"updatedAt\": \"Mon May 31 2021 15:16:36 GMT+0000 (Coordinated Universal Time)\"\n        },\n        {\n            \"id\": \"4\",\n            \"first_name\": \"Kover\",\n            \"last_name\": \"Mokas\",\n            \"email\": \"chubby@orokketermo.fa\",\n            \"createdAt\": \"Tue Jun 01 2021 19:08:41 GMT+0000 (Coordinated Universal Time)\",\n            \"updatedAt\": \"Tue Jun 01 2021 19:08:41 GMT+0000 (Coordinated Universal Time)\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -84,7 +84,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"first_name\": \"Ford\",\n    \"last_name\": \"Fairlane\", \n    \"email\": \"ford.fairlane@mail.com\"\n}",
+							"raw": "{\n\t\"first_name\": \"Testes\",\n    \"last_name\": \"Motkany\", \n    \"email\": \"obese@egigero.fa\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -132,7 +132,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"first_name\": \"Zuzu\",\n    \"last_name\": \"Petaz\", \n    \"email\": \"zuzu.petaz@mail.com\"\n}",
+							"raw": "{\n    \"first_name\": \"Mokus\",\n    \"last_name\": \"Miska\", \n    \"email\": \"mm@orokketermo.fa\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -173,6 +173,82 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Associate projects",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\": [1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/student/manage/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"student",
+								"manage",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/student/manage/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"student",
+								"manage",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get projects",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/api/student/manage/1",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"student",
+										"manage",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"projects\": [\r\n        {\r\n            \"id\": \"1\",\r\n            \"name\": \"Kígyó\"\r\n        },\r\n        {\r\n            \"id\": \"2\",\r\n            \"name\": \"Sakál\"\r\n        },\r\n        {\r\n            \"id\": \"4\",\r\n            \"name\": \"Odamenni\"\r\n        },\r\n        {\r\n            \"id\": \"5\",\r\n            \"name\": \"Hazamenni\"\r\n        }\r\n    ]\r\n}"
+						}
+					]
 				}
 			]
 		},
@@ -207,7 +283,7 @@
 							"_postman_previewlanguage": "json",
 							"header": null,
 							"cookie": [],
-							"body": "{\r\n    \"projects\": [\r\n        {\r\n            \"id\": \"1\",\r\n            \"name\": \"First project\",\r\n            \"desc\": \"\",\r\n            \"createdAt\": \"Mon May 24 2021 14:45:54 GMT+0200 (közép-európai nyári idő)\",\r\n            \"updatedAt\": \"Mon May 24 2021 14:45:54 GMT+0200 (közép-európai nyári idő)\"\r\n        }\r\n    ]\r\n}"
+							"body": "{\r\n    \"projects\": [\r\n        {\r\n            \"id\": \"1\",\r\n            \"name\": \"Kígyó\",\r\n            \"desc\": \"Elkergetni\",\r\n            \"createdAt\": \"Mon May 31 2021 15:16:53 GMT+0000 (Coordinated Universal Time)\",\r\n            \"updatedAt\": \"Mon May 31 2021 15:16:53 GMT+0000 (Coordinated Universal Time)\"\r\n        },\r\n        {\r\n            \"id\": \"2\",\r\n            \"name\": \"Sakál\",\r\n            \"desc\": \"Eliszkolni\",\r\n            \"createdAt\": \"Mon May 31 2021 15:17:04 GMT+0000 (Coordinated Universal Time)\",\r\n            \"updatedAt\": \"Mon May 31 2021 15:17:04 GMT+0000 (Coordinated Universal Time)\"\r\n        },\r\n        {\r\n            \"id\": \"4\",\r\n            \"name\": \"Odamenni\",\r\n            \"desc\": \"Fahoz\",\r\n            \"createdAt\": \"Tue Jun 01 2021 19:07:39 GMT+0000 (Coordinated Universal Time)\",\r\n            \"updatedAt\": \"Tue Jun 01 2021 19:07:39 GMT+0000 (Coordinated Universal Time)\"\r\n        },\r\n        {\r\n            \"id\": \"5\",\r\n            \"name\": \"Hazamenni\",\r\n            \"desc\": \"Erdobe\",\r\n            \"createdAt\": \"Tue Jun 01 2021 19:07:48 GMT+0000 (Coordinated Universal Time)\",\r\n            \"updatedAt\": \"Tue Jun 01 2021 19:07:48 GMT+0000 (Coordinated Universal Time)\"\r\n        }\r\n    ]\r\n}"
 						}
 					]
 				},
@@ -218,7 +294,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"First project\",\r\n    \"desc\": \"Some description\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Bolcs\",\r\n    \"desc\": \"Utbaigazitast kerni\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -307,110 +383,15 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "management",
-			"item": [
-				{
-					"name": "List",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:3000/api/management",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"management"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "List",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:3000/api/management",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"management"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": "{\r\n    \"managements\": [\r\n        {\r\n            \"id\": \"1\",\r\n            \"student_ids\": \"1\",\r\n            \"project_ids\": \"1\",\r\n            \"createdAt\": \"Tue May 25 2021 14:30:53 GMT+0200 (közép-európai nyári idő)\",\r\n            \"updatedAt\": \"Tue May 25 2021 14:30:53 GMT+0200 (közép-európai nyári idő)\"\r\n        },\r\n        {\r\n            \"id\": \"2\",\r\n            \"student_ids\": \"1,2,3\",\r\n            \"project_ids\": \"1,2\",\r\n            \"createdAt\": \"Tue May 25 2021 14:43:36 GMT+0200 (közép-európai nyári idő)\",\r\n            \"updatedAt\": \"Wed May 26 2021 09:46:05 GMT+0200 (közép-európai nyári idő)\"\r\n        }\r\n    ]\r\n}"
-						}
-					]
 				},
 				{
-					"name": "Create",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"student_ids\": [1,2,3],\r\n    \"project_ids\": [1]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/management",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"management"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Read",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:3000/api/management/1",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"management",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
+					"name": "Associate students",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"student_ids\": [1,2,3],\r\n    \"project_ids\": [1,2]\r\n}",
+							"raw": "{\r\n    \"ids\": [1,2]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -418,14 +399,15 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/api/management/1",
+							"raw": "localhost:3000/api/project/manage/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"api",
-								"management",
+								"project",
+								"manage",
 								"1"
 							]
 						}
@@ -433,19 +415,32 @@
 					"response": []
 				},
 				{
-					"name": "Delete",
+					"name": "Get students",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\": [1,2]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:3000/api/management/1",
+							"raw": "localhost:3000/api/project/manage/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"api",
-								"management",
+								"project",
+								"manage",
 								"1"
 							]
 						}

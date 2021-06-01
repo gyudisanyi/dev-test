@@ -100,4 +100,25 @@ lett: 2 óra, nemigen volt elakadás, de a db "project.description" és a több 
       Mikrók: saját könyvtárat kapnak a microservice könyvtáron belül,
         pl. ms/studentmicro: megkapja a config könyvtárat (service-ből csak a rá vonatkozó),
         megkapja a database/connect.js -t, a saját modeljét és persze a student.js -t. Másik kettő is eszerint.
-    
+    ## Ez könnyebben ment, mint gondoltam, de inkább hagytam a könyvtárszerkezetet, így csak egy helyen kell állítani pl. a configokat.
+    ## Egy 25 kb-os dependenciát (dotenv) adtam hozzá, 7 perc lett a build ettől, scary!
+    ## Nagyobb baj, hogy nem működik a dotenv. addig || '192.168.16.1' -- a definiált bridge ip-je.
+  
+  6.3 Student mikró dockere másolásával elkészült a másik kettő.
+
+  ## szépíteni lehetne: 
+      - dotenv beizzítása környezetnek megfelelően (vagy aktuális IP lekérdezése?)
+      - szétszedni a package.json-t rest-nek és grpc-nek való készletekre.
+      - frontenden rengeteg yagni-cukorka lehetne. Az a kis error bök (webpack-sock-js ügy,  ha dockerben).
+      - biztos pistikés lett több rész, pl. a dockerekbe rendezés talán nem jó így, inkább egy könyvtár illik mindnek külön.
+  
+  Összegzés: Tanulságos feladat volt, örülök, hogy megoldottam. Újdonság volt a grpc, a sequelize, dockert is csak teljesen
+  alapesetben használtam eddig és receptből.
+  Szépek ezek az absztrakciós rétegek, amíg csak másolni kell. Amint működtetni is, meg kell érteni a
+  különösségeiket, működésüket. Azután még szebbek (közben nem mindig).
+  Összesen vagy 18-20 órát pöcörögtem vele, ebből 12 óra tanulmányozás-olvasás-másolás-próbálgatás, 5-6 óra debug (néha "körbeértem"), 1-2 óra logika.
+  Tehát még egy a managementhez eléggé hasonló modult 1-2 óra alatt elkészítenék töviről hegyire. Vagy nem.
+  Tavaly ilyenkor nem tudtam, mi az a javascript. Ha így haladok, 60 év múlva én leszek az Uncle Tom!
+
+  ## Fürdetés közben megvilágosodás, fél szemmel, két órája látott info tudatosul.
+     Hiszen a composed containereknek van nevük, az a host. Fejlesztéshez meg kapnak egy .env-et a 0.0.0.0 ip-vel, amit a dockerek nem, hanem: env + configport || devtest-micro-student + configport.
