@@ -1,0 +1,16 @@
+version: "3"
+services:
+  grpc-server:
+    container_name: devtest-micro-student
+    build:
+      context: ./
+      dockerfile: Dockerfile-micro-student
+    ports:
+      - 50053:50053
+  grpc-client:
+    container_name: devtest-rest
+    build:
+      context: ./
+      dockerfile: Dockerfile-REST
+    ports:
+      - 3000:3000
